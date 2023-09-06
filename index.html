@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <title>Horas trabalhadas</title>
+    </head>
+    <body>
+        <noscript>Necessário ativar javascript para executar esse site</noscript>
+        <div class="game">
+            <h1 onclick="location.reload()">📖Calcule o valor total trabalhado📖</h1>
+            <div class="calculo">
+                <p>Valor hora:</p>
+                <input type="number" id="valor" placeholder="000.00"/>
+                <p>Horas trabalhadas:</p>
+                <input type="text" id="horas" placeholder="hh:mm:ss"/>
+                <button class="botao" onclick="valorTotal()">Calcular</button>
+                <div id="valorTotal">
+
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        function valorTotal(){
+            document.getElementById('valorTotal')
+            var valorHora = document.getElementById('valor').value;
+
+            if(!isNumeric(valorHora)){
+                alert('Valor hora incorreto!');
+                return;
+            }
+
+            var horas = document.getElementById('horas').value;
+            var time = horas.split(':');
+
+            if(time.length != 3){
+                alert('Deve ser preenchido: hh:mm:ss')
+                return;
+            }
+
+            var valorTotalDiv = document.getElementById('valorTotal');
+
+            while (valorTotalDiv.firstChild) {
+                valorTotalDiv.removeChild(valorTotalDiv.firstChild);
+            }
+            
+            var valorTotal = parseFloat(valorHora) * (parseFloat(time[0]) + (parseFloat(time[1])/60) + (parseFloat(time[2])/(60*60)));
+
+            var newParagraph = document.createElement('p');
+            newParagraph.textContent = 'Valor total no período de ' + horas + ': R$ ' + parseFloat(valorTotal);
+
+            valorTotalDiv.appendChild(newParagraph);
+        }
+    </script>
+</html>
