@@ -27,6 +27,11 @@ body{
     margin-top: 16px;
 }
 
+.calculo input{
+    padding: 8px;
+    border-radius: 5px;
+}
+
 .botao {
     text-decoration: none;
     display: flex;
